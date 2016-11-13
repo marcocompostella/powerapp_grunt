@@ -1,0 +1,21 @@
+<md-content>
+  <md-tabs md-dynamic-height md-border-bottom
+md-swipe-content="true"
+md-selected="selectedIndex">
+    <md-tab label="Dashboard">
+      <md-content class="md-padding">
+        <div ui-view=Dashboard></div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Engage">
+      <md-content class="md-padding">
+        <div ui-view=Engage></div>
+      </md-content>
+    </md-tab>
+    <md-tab label="Payment">
+      <md-content class="md-padding">
+        <div ui-view=Payment></div>
+      </md-content>
+    </md-tab>
+  </md-tabs>
+</md-content>

@@ -1,0 +1,19 @@
+.image{
+  width: 150px;
+  height: 150px;
+  border-radius: 50%; /*don't forget prefixes
+  background-image: url("path/to/image");*/
+  background-position: center center;
+  /* as mentioned by Vad: */
+  background-size: cover;
+}
+
+
+ .text-capitalize {
+  text-transform: capitalize; }
+
+ .md-fab:hover,  .md-fab.md-focused {
+  background-color: #000 !important; }
+
+ p.note {
+  font-size: 1.2rem; }
