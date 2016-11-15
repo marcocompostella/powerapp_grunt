@@ -25,7 +25,7 @@
     <!-- Add your site or application content here -->
 
 
-        <md-toolbar layout="row" class="md-whiteframe-z1" ng-show="isLogged">
+        <md-toolbar layout="row" class="md-whiteframe-z1" ng-show="view.isLogged">
           <div layout="row" layout-align="left center">
             <md-button ng-click="ac.back()" ng-if="back">
               <ng-md-icon icon="arrow_back"></ng-md-icon>
@@ -45,12 +45,12 @@
         md-component-id="left"
         ng-click="ac.toggleList()"
         md-is-locked-open="$mdMedia('gt-sm')"
-        ng-show="isLogged">
+        ng-show="view.isLogged">
         <md-toolbar class="md-whiteframe-z1" hide-gt-sm>
           <h3>Menu</h3>
         </md-toolbar>
         <md-list>
-          <md-list-item ng-repeat="item in ac.sidemenu">
+          <md-list-item ng-repeat="item in view.sidemenu">
             <md-button ng-click="ac.selectItem(item)"
                       ng-class="{'selected' : item === ac.selected }">
               <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
@@ -117,6 +117,7 @@
         <script src="scripts/controllers/setting.js"></script>
         <script src="scripts/controllers/training.js"></script>
         <script src="scripts/controllers/store.js"></script>
+        <script src="scripts/services/training.js"></script>
         <!-- endbuild -->
 </body>
 </html>

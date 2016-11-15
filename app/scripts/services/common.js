@@ -8,34 +8,33 @@
  * Service in the powerApp.
  */
 angular.module('powerApp')
-  .service('CommonService', function ($http,$q,API_ENDPOINT) {
+  .service('CommonService',['$http','$q','AuthService','API_ENDPOINT',
+    function ($http,$q,authService,API_ENDPOINT) {
   var _self = this;
 
-  var init = function (){};
-
-  var getInfo = function(cB) {
-    _self.userinfo.then(function(list){
-      cB(list);
-    });
-  };
-
-  var getUser = function() {
-    return _self.user;
-  };
-
-  var setUser = function(u) {
-    _self.user = u;
+  var init = function() {
     _self.userinfo = $q(function(resolve, reject) {
       $http.post(API_ENDPOINT.url + '/getUserInfo', _self.user).then(function(result) {
         resolve(result.data);
       });
     });
   };
+var wrapAuth = function(val){
+  authService.loginStatus(val);
+};
+
+  var logout = function(){
+    authService.logout();
+  };
+
+  var getUser = function() {return _self.user;};
+  var setUser = function(u) {_self.user = u;};
 
   return {
     init: init,
     setUser: setUser,
     getUser: getUser,
-    getInfo: getInfo
+    wrapAuth: wrapAuth,
+    logout: logout
   };
-});
+}]);

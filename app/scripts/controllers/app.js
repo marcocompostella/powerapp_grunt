@@ -9,25 +9,21 @@
  */
 angular.module('powerApp')
   .controller('appCtrl', ['$scope','$mdSidenav','$state',
-                    'AuthService','CommonService','AUTH_EVENTS',
-    function($scope,$mdSidenav,$state,authService,commonService,AUTH_EVENTS) {
+                    'CommonService',
+                    'AUTH_EVENTS','MENU',
+    function($scope,$mdSidenav,$state,
+              commonService,
+              AUTH_EVENTS, MENU) {
       var _self = this;
 
-
-   _self.menuOptions = [];
-
-      var setAuthView = function(view){
-        $scope.isLogged = view.showBar;
-        if (view.showBar){
-          _self.sidemenu = view.menu.sidemenu;
-        }
+      $scope.view = {
+        sidemenu : MENU,
+        isLogged : false
       };
 
-      var init = function (){
-        _self.selected = $state.current;
-      };
 
-      authService.init(setAuthView, init);
+
+      commonService.wrapAuth($scope.view);
 
       function toggleMenuList() {
         $mdSidenav('left').toggle();
@@ -59,14 +55,8 @@ angular.module('powerApp')
     });
 
 
-    var originatorEv;
-    _self.openMenu = function($mdOpenMenu, ev) {
-      originatorEv = ev;
-      $mdOpenMenu(ev);
-    };
-
     _self.logout = function() {
-      authService.logout();
+      commonService.logout();
       $state.go('Login');
     };
 

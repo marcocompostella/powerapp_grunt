@@ -43,12 +43,8 @@ angular.module('Dashboard', ['ngRateIt'])
 
       $scope.startTraining = function(){
         $state.go('Training');
-      }
-
-      $scope.list = null;
-      var setList = function(l){
-        $scope.list = l;
       };
 
-      commonService.getInfo(setList);
+
+
 }]);

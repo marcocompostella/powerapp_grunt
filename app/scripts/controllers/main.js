@@ -10,5 +10,6 @@
 angular.module('Main',[])
   .controller('mainCtrl',['CommonService', function (commonService) {
 
+    commonService.init();
 
   }]);
