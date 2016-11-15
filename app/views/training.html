@@ -1,1 +1,20 @@
-<p>This is the training view.</p>
+
+
+<div layout="row">
+<ng-md-icon icon="keyboard_arrow_left" layout="start"></ng-md-icon>
+<div layout="center"> data</div>
+<ng-md-icon icon="keyboard_arrow_right" layout="end"> </ng-md-icon>
+</div>
+
+   <section >
+     <md-subheader class="md-primary">Unread Messages</md-subheader>
+     <md-list layout-padding>
+       <md-list-item class="md-3-line" ng-repeat="message in messages">
+           <div class="md-list-item-text">
+             <p>
+               test
+             </p>
+           </div>
+       </md-list-item>
+     </md-list>
+   </section>

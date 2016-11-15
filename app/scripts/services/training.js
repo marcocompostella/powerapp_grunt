@@ -8,11 +8,11 @@
  * Service in the powerApp.
  */
 angular.module('powerApp')
-  .service('TrainingService', function () {
+  .service('TrainingService',[ function () {
     var _self = this;
 
-    var init = function(){
-      _self.scheda = [];
+    var init = function(schede){
+      _self.schede = schede;
       _self.index  = 0;
     };
 
@@ -21,4 +21,4 @@ angular.module('powerApp')
     return {
       init: init
     };
-});
+}]);

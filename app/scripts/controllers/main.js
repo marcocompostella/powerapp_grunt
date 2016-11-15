@@ -8,8 +8,9 @@
  * Controller of the powerApp
  */
 angular.module('Main',[])
-  .controller('mainCtrl',['CommonService', function (commonService) {
+  .controller('mainCtrl',['CommonService','trainingService',function (commonService,trainingService) {
 
     commonService.init();
+
 
   }]);
