@@ -8,10 +8,18 @@
  * Controller of the powerApp
  */
 angular.module('Training', [])
-  .controller('trainingCtrl', function () {
-    this.awesomeThings = [
-      'HTML5 Boilerplate',
-      'AngularJS',
-      'Karma'
-    ];
-  });
+  .controller('trainingCtrl', ['$scope','TrainingService', function ($scope, trainingService) {
+
+    var setScheda = function(l){
+      list = l;
+    };
+
+
+
+    trainingService.getScheda().then(function(result){
+      $scope.scheda = result;
+    });
+
+
+
+  }]);

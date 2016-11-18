@@ -1,20 +1,31 @@
-
-
 <div layout="row">
 <ng-md-icon icon="keyboard_arrow_left" layout="start"></ng-md-icon>
 <div layout="center"> data</div>
 <ng-md-icon icon="keyboard_arrow_right" layout="end"> </ng-md-icon>
 </div>
 
-   <section >
-     <md-subheader class="md-primary">Unread Messages</md-subheader>
-     <md-list layout-padding>
-       <md-list-item class="md-3-line" ng-repeat="message in messages">
-           <div class="md-list-item-text">
-             <p>
-               test
-             </p>
-           </div>
-       </md-list-item>
-     </md-list>
-   </section>
+
+<md-tabs md-dynamic-height md-border-bottom
+          md-swipe-content="true"
+          md-selected="selectedIndex">
+  <md-tab label="{{day.title}}"  ng-repeat="day in scheda.day">
+    <md-content class="md-padding">
+
+      <md-content style="height: 600px;">
+        <section ng-repeat="grp in day.gruppi">
+           <md-subheader class="md-primary">{{grp.nome}}</md-subheader>
+           <md-list layout-padding >
+             <md-list-item class="md-2-line" ng-repeat="eser in grp.esercizi">
+                  <div class="md-list-item-text">
+                    <h3>{{eser.nome}}</h3>
+                    <h4>{{eser.serie}} * {{eser.ripetizioni}}</h4>
+                  </div>
+             </md-list-item>
+           </md-list>
+        </section>
+
+     </md-content >
+
+     </md-content>
+   </md-tab>
+</md-tabs>
