@@ -26,7 +26,7 @@ angular.module('Dashboard', ['ngRateIt'])
 
       $scope.getPicture = function(){
         navigator.camera.getPicture(onSuccess, onFail, { quality: 50,
-            destinationType: Camera.DestinationType.FILE_URI });
+            destinationType: Camera.DestinationType.DATA_URL });
         };
       function onSuccess(imageURI) {
           var image = document.getElementById('myImage');

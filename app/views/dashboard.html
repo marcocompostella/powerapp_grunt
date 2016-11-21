@@ -1,6 +1,10 @@
 
   <md-content layout="column" layout-fill layout-align="start center" >
-    <img src="http://placekitten.com/g/400/200" class="image">
+    <img src="http://placekitten.com/g/400/200" class="image"
+          ng-click="getPicture()">
+          <img src="data:image/png;base64, iVBORw0KGgoAAAANSUhEUgAAAAUA
+AAAFCAYAAACNbyblAAAAHElEQVQI12P4//8/w38GIAXDIBKE0DHxgljNBAAO
+    9TXL0Y4OHwAAAABJRU5ErkJggg==" />
     <ng-rate-it
       min = "0"
       max = "5"
@@ -27,7 +31,6 @@
       </md-card>
     </md-content>
 
-<md-button ng-click="getPicture()">click</md-button>
 
 
   <md-fab-speed-dial md-direction="up" md-open='false'

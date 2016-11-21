@@ -1,10 +1,8 @@
 
 <md-tabs md-dynamic-height md-border-bottom
-          md-swipe-content="true"
-          md-selected="selectedIndex">
-  <md-tab label="{{day.title}}"  ng-repeat="day in scheda.day">
+          md-swipe-content="true" md-selected="selectedIndex">
+  <md-tab label="{{day.title}}" ng-repeat="day in scheda.day">
     <md-content class="md-padding">
-
       <md-content style="height: 600px;">
         <section ng-repeat="grp in day.gruppi">
            <md-subheader class="md-primary">{{grp.nome}}</md-subheader>
@@ -17,9 +15,7 @@
              </md-list-item>
            </md-list>
         </section>
-
-     </md-content >
-
-     </md-content>
-   </md-tab>
+      </md-content >
+    </md-content>
+  </md-tab>
 </md-tabs>

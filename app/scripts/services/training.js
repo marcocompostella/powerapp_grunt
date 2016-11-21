@@ -44,13 +44,17 @@ angular.module('powerApp')
         templateUrl: 'views/dialogMonth.html',
         controller: DialogController,
         resolve: {
-          schede: function(){
-            return _self.schede;
+          training: function(){
+            return {
+              schede:_self.schede,
+              index :_self.index
+            }
           }
         }
      })
      .then(function(index) {
        downloadScheda(_self.schede[index]).then(function(result){
+         _self.index = index;
          _self.view.scheda = result;
        });;
      }, function() {
@@ -66,12 +70,15 @@ angular.module('powerApp')
     };
 }]);
 
-function DialogController($scope, $mdDialog, schede) {
-  $scope.list = schede.map(function(x){return x.data});
-
+function DialogController($scope, $mdDialog, training) {
+  var first = true;
+  $scope.list = training.schede.map(function(x){return x.data});
+  $scope.indx = training.index;
   $scope.$watch('indx',function(nVal,oVal){
-    if (nVal!=undefined)
+    if (first == true) {
+      first = false;
+      return;
+    }
     $mdDialog.hide($scope.indx);
   });
-
  }
