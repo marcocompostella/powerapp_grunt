@@ -1,0 +1,17 @@
+<md-dialog>
+  <md-dialog-content>
+    <div class="md-dialog-content">
+      Select training:
+    </div>
+  </md-dialog-content>
+
+    <md-dialog-actions layout="column" layout-align="start start">
+      <md-radio-group ng-model="indx">
+        <md-radio-button ng-repeat="item in list"
+                    value="{{$index}}">
+            {{item|date:'MMM/yy'}}
+        </md-radio-button>
+      </md-radio-group>
+
+    </md-dialog-actions>
+</md-dialog>

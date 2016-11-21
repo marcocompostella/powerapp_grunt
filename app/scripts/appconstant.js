@@ -14,7 +14,7 @@ angular.module('powerApp')
 )
   .constant('AUTH_EVENTS', {notAuthenticated: 'auth-not-authenticated'})
 
-  .constant('MENU', [{
+  .constant('SIDEMENU', [{
                 icon:"dashboard",
                 state:"Dashboard",
                 nested: 'Main',
@@ -34,4 +34,30 @@ angular.module('powerApp')
                 state:"Logout",
                 action: "logout",
                 type: 'f'
-              }]);
+              }])
+
+  .constant('MENU', [{
+                state:"Main",
+                list:[{
+                    icon:"settings",
+                    label: 'Setting'
+                  },{
+                      icon:"logout",
+                      label: 'Logout'
+                  }]
+              },{
+                state:"Training",
+                list:[{
+                    icon:"today",
+                    state: 'Training',
+                    funct: 'selMon',
+                    label: 'Select Month'
+                  }]
+              },{
+                state:"Setting",
+                list:[{
+                    icon:"logout",
+                    label: 'Logout'
+                  }]
+              }
+            ]);

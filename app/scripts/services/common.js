@@ -15,36 +15,42 @@ angular.module('powerApp')
   var _self = this;
 
   var init = function() {
-    $http.post(API_ENDPOINT.url + '/mobileInfo', _self.user).then(function(result) {
+    $http.get(API_ENDPOINT.url + '/mobileInfo').then(function(result) {
       _self.userinfo = result.data.userInfo;
+      authService.changeLoginStatus(true);
 
-      var promise = $q(function(resolve, reject) {
-        $http.post(API_ENDPOINT.url + '/mobileScheda', _self.userinfo.scheda[0]).then(function(result) {
-          if (result.data.success) {
-            resolve(result.data.scheda);
-          } else {
-            reject();
-          }
-        });
-      });
-      trainingService.init(promise,_self.userinfo.scheda);
+      trainingService.init(_self.userinfo.scheda);
     });
   };
   var wrapAuth = function(val){
-    authService.loginStatus(val);
+    authService.setLoginStatus(val);
   };
   var logout = function(){
     authService.logout();
   };
-
+  var changeState = function (state){
+    //_self.menu.splice(0,_self.menu.length);
+    _self.view.menus.forEach(function(e){
+      if (e.state == state) {
+        _self.view.menu = e.list;
+      };
+    });
+  };
+  var choseMonth = function(){
+    trainingService.popMonth()
+  };
   var getUser = function() {return _self.user;};
   var setUser = function(u) {_self.user = u;};
+  var setMenu = function(m) {_self.view = m;};
 
   return {
     init: init,
     setUser: setUser,
     getUser: getUser,
+    setMenu: setMenu,
     wrapAuth: wrapAuth,
+    changeState: changeState,
+    choseMonth: choseMonth,
     logout: logout
   };
 }]);

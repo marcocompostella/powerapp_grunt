@@ -32,15 +32,16 @@ angular
     'Training',
     'Store'
   ])
-    .run(function ($rootScope, $state, AuthService) {
-        $rootScope.$on('$stateChangeStart', function (event,next) {
+    .run(function ($rootScope, $state,AuthService,CommonService) {
+        $rootScope.$on('$stateChangeStart', function (event,next,toParams, fromState, fromParams) {
+        //  event, toState, toParams, fromState, fromParams
           if (!AuthService.isAuthenticated()) {
             if (next.name !== 'Login' ) {
               event.preventDefault();
-                $state.go('Login');
+              $state.go('Login');
             }
           }else {
-            //setting back history
+            CommonService.changeState(next.name);
           }
       });
   });

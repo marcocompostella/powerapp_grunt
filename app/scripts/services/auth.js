@@ -58,8 +58,11 @@ angular.module('powerApp')
       });
     });
   };
-  var loginStatus = function(v){
+  var setloginStatus = function(v){
     _self.view = v;
+  };
+  var changeLoginStatus = function(v){
+    _self.view.isLogged = v;
   };
 
   var logout = function() {
@@ -67,13 +70,12 @@ angular.module('powerApp')
     destroyUserCredentials();
   };
 
-  var init = function (){
-    loadUserSetting();
-  };
+
+  loadUserSetting();
 
   return {
-    init: init,
-    loginStatus: loginStatus,
+    setLoginStatus: setloginStatus,
+    changeLoginStatus: changeLoginStatus,
     login: login,
     logout: logout,
     isAuthenticated: function() { return isAuthenticated; },

@@ -30,11 +30,11 @@
       });
     };
 
-        $scope.clear = function() {
-          $scope.login = {
-            remember: false,
-          };
-        };
+    $scope.clear = function() {
+      $scope.login = {
+        remember: false,
+      };
+    };
 
 
 }]);

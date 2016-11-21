@@ -35,7 +35,22 @@
             </md-button>
           </div>
           <h3 layout-align="center center">PowerAPP</h3>
-          <div layout="row" layout-align="right center"></div>
+          <div layout="row" layout-align="right center">
+            <md-menu>
+              <md-button class="md-icon-button"
+                          ng-click="ac.openMenu($mdOpenMenu, $event)">
+                <ng-md-icon icon="more_vert"></ng-md-icon>
+              </md-button>
+              <md-menu-content >
+                <md-menu-item ng-repeat="itm in view.menu">
+                  <md-button ng-click="ac.selectMenu(itm)">
+                    <ng-md-icon icon="{{itm.icon}}"></ng-md-icon>
+                    {{itm.label}}
+                  </md-button>
+                </md-menu-item>
+              </md-menu-content>
+            </md-menu>
+          </div>
         </md-toolbar>
 
 
@@ -104,9 +119,9 @@
 
         <script src="scripts/services/cordova.js"></script>
         <script src="scripts/services/authinterceptor.js"></script>
+        <script src="scripts/services/common.js"></script>
         <script src="scripts/services/auth.js"></script>
         <script src="scripts/services/training.js"></script>
-        <script src="scripts/services/common.js"></script>
 
         <script src="scripts/controllers/app.js"></script>
         <script src="scripts/controllers/login.js"></script>

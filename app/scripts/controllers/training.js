@@ -14,11 +14,7 @@ angular.module('Training', [])
       list = l;
     };
 
-
-
-    trainingService.getScheda().then(function(result){
-      $scope.scheda = result;
-    });
+    trainingService.bindScheda($scope);
 
 
 
