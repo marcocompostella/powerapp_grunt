@@ -12,10 +12,16 @@
         },
         "cordova-plugin-camera": {
             "PACKAGE_NAME": "com.mcs.papp"
+        },
+        "cordova-plugin-file-transfer": {
+            "PACKAGE_NAME": "com.mcs.papp"
         }
     },
     "dependent_plugins": {
         "cordova-plugin-compat": {
+            "PACKAGE_NAME": "com.mcs.papp"
+        },
+        "cordova-plugin-file": {
             "PACKAGE_NAME": "com.mcs.papp"
         }
     }
