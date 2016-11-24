@@ -39,6 +39,17 @@ angular.module('powerApp')
   var choseMonth = function(){
     trainingService.popMonth()
   };
+
+  var capture = function(fileURI){
+      var options = new FileUploadOptions();
+      options.fileKey = "file";
+      options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+      options.mimeType = "image/jpeg";
+      options.params = {}; // if we need to send parameters to the server request
+      var ft = new FileTransfer();
+      ft.upload(fileURI, encodeURI(API_ENDPOINT.url + "/mobileUpPhoto"), win, fail, options);
+  }
+
   var getUser = function() {return _self.user;};
   var setUser = function(u) {_self.user = u;};
   var setMenu = function(m) {_self.view = m;};
@@ -48,6 +59,7 @@ angular.module('powerApp')
     setUser: setUser,
     getUser: getUser,
     setMenu: setMenu,
+    capture: capture,
     wrapAuth: wrapAuth,
     changeState: changeState,
     choseMonth: choseMonth,
