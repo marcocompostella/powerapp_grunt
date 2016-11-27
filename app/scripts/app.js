@@ -11,7 +11,6 @@
 angular
   .module('powerApp', [
     'ui.router',
-    'uiRouterStyles',
     'ngAnimate',
     'ngAria',
     'ngMaterial',

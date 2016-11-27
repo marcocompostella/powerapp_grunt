@@ -37,7 +37,7 @@ angular.module('powerApp')
     // Set the token as header for your requests!
     $http.defaults.headers.common.Authorization = authToken;
   }
-
+  
   function destroyUserCredentials() {
     authToken = undefined;
     isAuthenticated = false;
@@ -71,6 +71,11 @@ angular.module('powerApp')
   };
 
 
+var getHeaderAuth = function(){
+  return authToken;
+}
+
+
   loadUserSetting();
 
   return {
@@ -78,6 +83,7 @@ angular.module('powerApp')
     changeLoginStatus: changeLoginStatus,
     login: login,
     logout: logout,
+    getHeaderAuth: getHeaderAuth,
     isAuthenticated: function() { return isAuthenticated; },
   };
 

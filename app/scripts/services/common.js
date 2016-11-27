@@ -40,15 +40,29 @@ angular.module('powerApp')
     trainingService.popMonth()
   };
 
+  var win = function(msg){
+  console.log("w: ",msg);
+  };
+  var fail = function(msg){
+  console.log("l: ",msg);
+  };
   var capture = function(fileURI){
-      var options = new FileUploadOptions();
-      options.fileKey = "file";
-      options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
-      options.mimeType = "image/jpeg";
-      options.params = {}; // if we need to send parameters to the server request
-      var ft = new FileTransfer();
-      ft.upload(fileURI, encodeURI(API_ENDPOINT.url + "/mobileUpPhoto"), win, fail, options);
+    var options = new FileUploadOptions();
+    var ft = new FileTransfer();
+    var headers={'Authorization': authService.getHeaderAuth()};
+
+    options.fileKey = "file";
+    options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
+    options.mimeType = "image/jpeg";
+    options.chunkedMode = true;
+    options.params = {}; // if we need to send parameters to the server request
+    options.headers = headers;
+console.log(fileURI);
+    ft.upload(fileURI, encodeURI(API_ENDPOINT.url + "/mobileUpPhoto"), win, fail, options);
   }
+
+
+
 
   var getUser = function() {return _self.user;};
   var setUser = function(u) {_self.user = u;};

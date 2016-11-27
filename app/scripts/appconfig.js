@@ -16,8 +16,8 @@ angular.module('powerApp')
       };
 
       $mdThemingProvider.theme('default')
-                            .primaryPalette('grey')
-                            .accentPalette('red');
+                          .primaryPalette('grey')
+                          .accentPalette('red');
 
       $httpProvider.interceptors.push('AuthInterceptor');
 
@@ -25,7 +25,6 @@ angular.module('powerApp')
       $stateProvider
         .state('Main', {
           url : '/main',
-          data : {css : 'styles/main.css'},
           views: {
             '': {
               templateUrl : 'views/main.html',

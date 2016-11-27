@@ -12,7 +12,6 @@
     "angular-ui-router": "^0.3.2",
     "angular-local-storage": "^0.5.2",
     "angular-material-icons": "^0.7.1",
-    "angular-ui-router-styles": "^1.1.0",
     "angular-rateit": "^3.0.2"
   },
   "devDependencies": {
