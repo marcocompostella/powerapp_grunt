@@ -37,100 +37,69 @@ angular.module('Dashboard', ['ngRateIt'])
         });
       }
 
+      var logOb;
       $scope.getPicture = function(){
   /*      navigator.camera.getPicture(onCapturePhoto, onFail, {
             quality: 100,
             destinationType: destinationType.FILE_URI
         });*/
+  //commonService.capture(cordova.file.dataDirectory+"/log.txt");
+  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
+         console.log("got main dir",dir);
+         dir.getFile("log.txt", {create:true}, function(file) {
+             console.log("got the file", file);
+             logOb = file;
+             writeLog("App started");
+         });
+     });
+      };
 
-
-
-
-              writeFile0();
-  //commonService.capture('images/male.png');
-
+      $scope.send = function(){
+commonService.capture(cordova.file.dataDirectory+"/log.txt");
       };
 
 
 
 
+      $scope.read = function(){
+        console.log('path:');
+        console.log(cordova.file.dataDirectory);
+       window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/log.txt", gotFile, fail);
+      };
 
-
-      function writeFile0() {
-        window.requestFileSystem(LocalFileSystem.PERSISTENT, 0, function (fs) {
-
-         console.log('file system open: ' + fs.name);
-         fs.root.getFile("newFile.txt", { create: true, exclusive: false }, function (fileEntry) {
-
-             console.log("fileEntry is file?" + fileEntry.isFile.toString());
-             writeFile(fileEntry, null);
-
-         }, onErrorCreateFile);
-
-     }, onErrorLoadFs);
-
-     function onErrorCreateFile() {};
-     function onErrorLoadFs() {};
-
-
-     function writeFile(fileEntry, dataObj) {
-         fileEntry.createWriter(function (fileWriter) {
-             fileWriter.onwriteend = function() {
-                 console.log("Successful file write...");
-                 readFile(fileEntry);
-             };
-
-             fileWriter.onerror = function (e) {
-                 console.log("Failed file write: " + e.toString());
-             };
-
-             // If data object is not passed in,
-             // create a new Blob instead.
-             if (!dataObj) {
-                 dataObj = new Blob(['some file data test'], { type: 'text/plain' });
-             }
-
-             function readFile(fileEntry) {
-               fileEntry.file(function (file) {
-                     var reader = new FileReader();
-                     reader.onloadend = function() {
-                       console.log("Successful file fileEntry.fullPath: " + fileEntry.fullPath);
-                         console.log("Successful file read: " + this.result);
-                     };
-                     reader.readAsText(file);
-                 }, onErrorReadFile);
-
-                      function onErrorReadFile() {};
-
-             }
-
-             fileWriter.write(dataObj);
-         });
-
-     }
-}
+function gotFile(fileEntry) {
+    fileEntry.file(function(file) {
+        var reader = new FileReader();
+        reader.onloadend = function(e) {
+            console.log("Text is: ",e);
+        }
+        reader.readAsText(file);
+    });
+};
 
 
 
+            function writeLog(str) {
+                if(!logOb) return;
+                var log = str + " [" + (new Date()) + "]\n";
+                console.log("going to log "+log);
+                logOb.createWriter(function(fileWriter) {
+                    fileWriter.seek(fileWriter.length);
+                    var blob = new Blob([log], {type:'text/plain'});
+                    fileWriter.write(blob);
+                    console.log("ok, in theory i worked");
+                }, fail);
+            };
+            function fail(e) {
+             console.log("FileSystem Error");
+             console.dir(e);
+           };
 
 
-
-
-
-
-
-
-
-
-     function onFail(message) {
-       console.log('Failed because: ' + message);
-     }
 
       cordovaService.ready.then(function () {
-
             pictureSource = navigator.camera.PictureSourceType;
             destinationType = navigator.camera.DestinationType;
-
       });
 
       $scope.startTraining = function(){
