@@ -52,7 +52,8 @@ angular.module('Dashboard', ['ngRateIt'])
       };
 
       $scope.send = function(){
-        commonService.capture(cordova.file.dataDirectory+"/log.txt");
+        var file = cordova.file.externalDataDirectory + 'test.jpg';
+        commonService.capture(file);
       };
 
       $scope.read = function(){
