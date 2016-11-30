@@ -25,41 +25,35 @@ angular.module('Dashboard', ['ngRateIt'])
       $scope.user = commonService.getUser();
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value
+      var camera;
 
       function clearCache() {
           navigator.camera.cleanup();
       }
 
-
       function onCapturePhoto(fileURI) {
-          commonService.capture(fileURI).then(function(result){
+        console.log(fileURI);
+        commonService.capture(fileURI).then(function(result){
           clearCache();
         });
       }
+      function onFail(e) {
+         console.log("FileSystem Error");
+         console.dir(e);
+      };
 
-      var logOb;
       $scope.getPicture = function(){
-  /*      navigator.camera.getPicture(onCapturePhoto, onFail, {
-            quality: 100,
-            destinationType: destinationType.FILE_URI
-        });*/
-  //commonService.capture(cordova.file.dataDirectory+"/log.txt");
-  window.resolveLocalFileSystemURL(cordova.file.dataDirectory, function(dir) {
-         console.log("got main dir",dir);
-         dir.getFile("log.txt", {create:true}, function(file) {
-             console.log("got the file", file);
-             logOb = file;
-             writeLog("App started");
-         });
-     });
+        navigator.camera.getPicture(onCapturePhoto, onFail, {
+          quality: 100,
+          destinationType: Camera.DestinationType.FILE_URI,
+          sourceType: Camera.PictureSourceType.CAMERA,      // 0:Photo Library, 1=Camera, 2=Saved Photo Album
+          encodingType: Camera.EncodingType.JPEG,     // 0=JPG 1=PNG
+        });
       };
 
       $scope.send = function(){
-commonService.capture(cordova.file.dataDirectory+"/log.txt");
+        commonService.capture(cordova.file.dataDirectory+"/log.txt");
       };
-
-
-
 
       $scope.read = function(){
         console.log('path:');
@@ -67,39 +61,10 @@ commonService.capture(cordova.file.dataDirectory+"/log.txt");
        window.resolveLocalFileSystemURL(cordova.file.dataDirectory + "/log.txt", gotFile, fail);
       };
 
-function gotFile(fileEntry) {
-    fileEntry.file(function(file) {
-        var reader = new FileReader();
-        reader.onloadend = function(e) {
-            console.log("Text is: ",e);
-        }
-        reader.readAsText(file);
-    });
-};
-
-
-
-            function writeLog(str) {
-                if(!logOb) return;
-                var log = str + " [" + (new Date()) + "]\n";
-                console.log("going to log "+log);
-                logOb.createWriter(function(fileWriter) {
-                    fileWriter.seek(fileWriter.length);
-                    var blob = new Blob([log], {type:'text/plain'});
-                    fileWriter.write(blob);
-                    console.log("ok, in theory i worked");
-                }, fail);
-            };
-            function fail(e) {
-             console.log("FileSystem Error");
-             console.dir(e);
-           };
-
-
-
       cordovaService.ready.then(function () {
-            pictureSource = navigator.camera.PictureSourceType;
-            destinationType = navigator.camera.DestinationType;
+        pictureSource = navigator.camera.PictureSourceType;
+        destinationType = navigator.camera.DestinationType;
+        camera = navigator.camera;
       });
 
       $scope.startTraining = function(){

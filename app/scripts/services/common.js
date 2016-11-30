@@ -64,6 +64,20 @@ console.log(fileURI);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   var getUser = function() {return _self.user;};
   var setUser = function(u) {_self.user = u;};
   var setMenu = function(m) {_self.view = m;};
