@@ -18,10 +18,18 @@ angular.module('powerApp')
     $http.get(API_ENDPOINT.url + '/mobileInfo').then(function(result) {
       _self.userinfo = result.data.userInfo;
       authService.changeLoginStatus(true);
-
+      getPhoto();
       trainingService.init(_self.userinfo.scheda);
     });
   };
+function getPhoto(){
+  $http.get(API_ENDPOINT.url + '/mobilePhoto').then(function(result) {
+console.log('tes');
+  });
+};
+
+
+
   var wrapAuth = function(val){
     authService.setLoginStatus(val);
   };
