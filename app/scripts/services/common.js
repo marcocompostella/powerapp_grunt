@@ -46,7 +46,7 @@ angular.module('powerApp')
   var fail = function(msg){
   console.log("l: ",msg);
   };
-  var capture = function(fileURI){
+  var sendAvatar = function(fileURI,id){
     var options = new FileUploadOptions();
     var ft = new FileTransfer();
     var headers={'Authorization': authService.getHeaderAuth()};
@@ -55,27 +55,11 @@ angular.module('powerApp')
     options.fileName = fileURI.substr(fileURI.lastIndexOf('/') + 1);
     options.mimeType = "image/jpeg";
     options.chunkedMode = true;
-    options.params = {}; // if we need to send parameters to the server request
+    options.params = {userid:id}; // if we need to send parameters to the server request
     options.headers = headers;
-console.log(fileURI);
+    console.log(fileURI);
     ft.upload(fileURI, encodeURI(API_ENDPOINT.url + "/mobileUpPhoto"), win, fail, options);
   }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
   var getUser = function() {return _self.user;};
@@ -87,8 +71,8 @@ console.log(fileURI);
     setUser: setUser,
     getUser: getUser,
     setMenu: setMenu,
-    capture: capture,
     wrapAuth: wrapAuth,
+    sendAvatar: sendAvatar,
     changeState: changeState,
     choseMonth: choseMonth,
     logout: logout

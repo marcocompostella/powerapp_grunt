@@ -1,5 +1,4 @@
 'use strict';
-
 /**
  * @ngdoc function
  * @name powerApp.controller:DashboardCtrl
@@ -23,6 +22,7 @@ angular.module('Dashboard', ['ngRateIt'])
           custom: 4,
       };
       $scope.user = commonService.getUser();
+      console.log($scope.user);
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value
       var camera;
@@ -33,7 +33,7 @@ angular.module('Dashboard', ['ngRateIt'])
 
       function onCapturePhoto(fileURI) {
         console.log(fileURI);
-        commonService.capture(fileURI).then(function(result){
+        commonService.sendAvatar(fileURI, $scope.user._id).then(function(result){
           clearCache();
         });
       }
@@ -53,7 +53,7 @@ angular.module('Dashboard', ['ngRateIt'])
 
       $scope.send = function(){
         var file = cordova.file.externalDataDirectory + 'test.jpg';
-        commonService.capture(file);
+        commonService.sendAvatar(file, $scope.user._id);
       };
 
       $scope.read = function(){
