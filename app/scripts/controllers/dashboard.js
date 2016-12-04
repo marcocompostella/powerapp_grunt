@@ -22,7 +22,8 @@ angular.module('Dashboard', ['ngRateIt'])
           custom: 4,
       };
       $scope.user = commonService.getUser();
-      console.log($scope.user);
+      $scope.avatar = commonService.getPhoto();
+    //  console.log($scope.user);
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value
       var camera;

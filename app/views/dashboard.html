@@ -1,6 +1,7 @@
 
   <md-content layout="column" layout-fill layout-align="start center" >
-    <img src="images/male.png" class="image"
+
+    <img ng-src="data:image/jpeg;base64,{{avatar}}" class="image"
           ng-click="getPicture()" />
           <md-button ng-click="read()">read</md-button>
           <md-button ng-click="send()">send</md-button>

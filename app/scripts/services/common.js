@@ -8,25 +8,33 @@
  * Service in the powerApp.
  */
 angular.module('powerApp')
-  .service('CommonService',['$http','$q',
+  .service('CommonService',['$http','$q','CordovaService',
             'AuthService','TrainingService',
             'API_ENDPOINT',
-    function ($http,$q,authService,trainingService,API_ENDPOINT) {
+    function ($http,$q,cordovaService,authService,trainingService,API_ENDPOINT) {
   var _self = this;
+  _self.start = false;
+
+  function getPromisePhoto(){
+    return $http.get(API_ENDPOINT.url + '/mobilePhoto');
+  };
 
   var init = function() {
+    _self.start = true;
     $http.get(API_ENDPOINT.url + '/mobileInfo').then(function(result) {
       _self.userinfo = result.data.userInfo;
       authService.changeLoginStatus(true);
-      getPhoto();
+      getPromisePhoto().then(function(res) {
+        _self.photo = res.data.img;
+      });
       trainingService.init(_self.userinfo.scheda);
     });
   };
-function getPhoto(){
-  $http.get(API_ENDPOINT.url + '/mobilePhoto').then(function(result) {
-console.log('tes');
-  });
-};
+
+
+
+
+
 
 
 
@@ -70,15 +78,45 @@ console.log('tes');
   }
 
 
+
+
+
+    var notificationOpenedCallback = function(jsonData) {
+      console.log('notificationOpenedCallback: ' + JSON.stringify(jsonData));
+    };
+
+    cordovaService.ready.then(function () {
+      window.plugins.OneSignal
+        .startInit("cd0dc958-90b1-437b-8ff5-09d6211a1a70", "949075032282")
+        .handleNotificationOpened(notificationOpenedCallback)
+        .endInit();
+    });
+
+
+
+
+
+
+
+
+
+
+
+
+
   var getUser = function() {return _self.user;};
+  var getPhoto = function() {return _self.photo;};
   var setUser = function(u) {_self.user = u;};
   var setMenu = function(m) {_self.view = m;};
+  var isStart = function() {return _self.start};
 
   return {
     init: init,
+    isStart: isStart,
+    setMenu: setMenu,
     setUser: setUser,
     getUser: getUser,
-    setMenu: setMenu,
+    getPhoto: getPhoto,
     wrapAuth: wrapAuth,
     sendAvatar: sendAvatar,
     changeState: changeState,

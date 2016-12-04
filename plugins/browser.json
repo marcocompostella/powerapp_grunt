@@ -18,6 +18,9 @@
         },
         "cordova-plugin-file": {
             "PACKAGE_NAME": "com.mcs.papp"
+        },
+        "onesignal-cordova-plugin": {
+            "PACKAGE_NAME": "com.mcs.papp"
         }
     },
     "dependent_plugins": {

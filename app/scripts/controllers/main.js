@@ -11,6 +11,7 @@ angular.module('Main',[])
   .controller('mainCtrl',['CommonService',function (commonService) {
 
 //inizializzo common : training
+  if (!commonService.isStart())
     commonService.init();
 
 
