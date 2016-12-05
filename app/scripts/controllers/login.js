@@ -20,6 +20,7 @@
 
     $scope.loginPost = function() {
       authService.login($scope.login).then(function(user) {
+          commonService.init();
           commonService.setUser(user);
           $state.go('Main');
       }, function() {

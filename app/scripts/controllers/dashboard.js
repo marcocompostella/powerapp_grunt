@@ -22,7 +22,11 @@ angular.module('Dashboard', ['ngRateIt'])
           custom: 4,
       };
       $scope.user = commonService.getUser();
-      $scope.avatar = commonService.getPhoto();
+
+      var changePhoto = function (newPhoto){$scope.avatar = newPhoto;};
+
+
+      commonService.setPhoto(changePhoto);
     //  console.log($scope.user);
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value

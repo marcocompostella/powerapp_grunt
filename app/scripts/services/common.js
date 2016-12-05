@@ -22,11 +22,15 @@ angular.module('powerApp')
   var init = function() {
     _self.start = true;
     $http.get(API_ENDPOINT.url + '/mobileInfo').then(function(result) {
-      _self.userinfo = result.data.userInfo;
       authService.changeLoginStatus(true);
-      getPromisePhoto().then(function(res) {
-        _self.photo = res.data.img;
-      });
+
+      var indx = result.data.collections.map(function(x){return x.type}).indexOf('userinfo');
+      _self.userinfo = result.data.collections[indx].userInfo;
+
+      var indx = result.data.collections.map(function(x){return x.type}).indexOf('photo');
+      _self.setPhoto(result.data.collections[indx].img);
+
+
       trainingService.init(_self.userinfo.scheda);
     });
   };
@@ -106,6 +110,7 @@ angular.module('powerApp')
 
   var getUser = function() {return _self.user;};
   var getPhoto = function() {return _self.photo;};
+  var setPhoto = function(p) {_self.setPhoto = p;};
   var setUser = function(u) {_self.user = u;};
   var setMenu = function(m) {_self.view = m;};
   var isStart = function() {return _self.start};
@@ -117,6 +122,7 @@ angular.module('powerApp')
     setUser: setUser,
     getUser: getUser,
     getPhoto: getPhoto,
+    setPhoto: setPhoto,
     wrapAuth: wrapAuth,
     sendAvatar: sendAvatar,
     changeState: changeState,
