@@ -21,13 +21,14 @@ angular.module('Dashboard', ['ngRateIt'])
           callbacks: 5,
           custom: 4,
       };
+
+
+
       $scope.user = commonService.getUser();
 
       var changePhoto = function (newPhoto){$scope.avatar = newPhoto;};
-
-
       commonService.setPhoto(changePhoto);
-    //  console.log($scope.user);
+
       var pictureSource;   // picture source
       var destinationType; // sets the format of returned value
       var camera;
@@ -37,7 +38,6 @@ angular.module('Dashboard', ['ngRateIt'])
       }
 
       function onCapturePhoto(fileURI) {
-        console.log(fileURI);
         commonService.sendAvatar(fileURI, $scope.user._id).then(function(result){
           clearCache();
         });
@@ -78,5 +78,6 @@ angular.module('Dashboard', ['ngRateIt'])
       };
 
 
+      commonService.start('Dashboard');
 
 }]);
