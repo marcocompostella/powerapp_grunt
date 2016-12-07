@@ -29,7 +29,8 @@ angular.module('powerApp')
       _self.userinfo = result.data.collections[indx].userInfo;
       indx = result.data.collections.map(function(x){return x.type}).indexOf('photo');
       _self.photo = result.data.collections[indx].img
-      _self.setPhoto(_self.photo);
+      if(_self.setPhoto)
+        _self.setPhoto(_self.photo);
 
       trainingService.init(_self.userinfo.scheda);
     });

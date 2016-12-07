@@ -32,7 +32,6 @@ angular.module('powerApp')
   }
 
   function useCredentials(token) {
-    isAuthenticated = true;
     authToken = token;
     // Set the token as header for your requests!
     $http.defaults.headers.common.Authorization = authToken;
@@ -49,6 +48,7 @@ angular.module('powerApp')
     return $q(function(resolve, reject) {
       $http.post(API_ENDPOINT.url + '/mobileAuth', user).then(function(result) {
         if (result.data.success) {
+          isAuthenticated = true;
           _self.view.isLogged = true;
           storeUserCredentials(result.data.token);
           resolve(result.data.user);
@@ -70,13 +70,11 @@ angular.module('powerApp')
     destroyUserCredentials();
   };
 
+  var getHeaderAuth = function(){
+    return authToken;
+  }
 
-var getHeaderAuth = function(){
-  return authToken;
-}
-
-
-  loadUserSetting();
+  loadUserSetting(  );
 
   return {
     setLoginStatus: setloginStatus,
@@ -84,7 +82,9 @@ var getHeaderAuth = function(){
     login: login,
     logout: logout,
     getHeaderAuth: getHeaderAuth,
-    isAuthenticated: function() { return isAuthenticated; },
+    isAuthenticated: function() {
+       return isAuthenticated;
+     },
   };
 
 }]);
