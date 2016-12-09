@@ -9,9 +9,9 @@
  */
 angular.module('powerApp')
   .constant('API_ENDPOINT',
-   {url: 'http://powerhero.cloudno.de'}
-// {url: 'http://localhost:8181'}
-   //{url: 'http://192.168.1.2:8181'}
+   //{url: 'http://powerhero.cloudno.de'}
+      {url: 'http://localhost:8181'}
+//   {url: 'http://192.168.1.2:8181'}
 )
   .constant('AUTH_EVENTS', {notAuthenticated: 'auth-not-authenticated'})
 

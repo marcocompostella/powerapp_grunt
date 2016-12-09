@@ -17,3 +17,19 @@
 
  p.note {
   font-size: 1.2rem; }
+
+
+  .swipe-li{ border-radius: 3px;  }
+  .main-content {
+    margin: 0;
+    padding: 0;
+    text-align: center;
+    height: 58px;
+    background: #ECF0F1;
+    color: #95A5A6;
+  }
+
+  .item { margin-bottom: 20px; cursor: col-resize; }
+
+  .invert .swipe-li ul li.pane.reject { background: #fff; color: #DA5B3D; }
+  .invert .swipe-li ul li.pane.accept { background: #fff; color: #7CDD90; }

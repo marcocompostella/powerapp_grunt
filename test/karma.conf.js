@@ -20,6 +20,7 @@ module.exports = function(config) {
     // list of files / patterns to load in the browser
     files: [
       // bower:js
+      'bower_components/modernizr/modernizr.js',
       'bower_components/angular/angular.js',
       'bower_components/angular-animate/angular-animate.js',
       'bower_components/angular-aria/angular-aria.js',
@@ -31,6 +32,8 @@ module.exports = function(config) {
       'bower_components/angular-local-storage/dist/angular-local-storage.js',
       'bower_components/angular-material-icons/angular-material-icons.min.js',
       'bower_components/angular-rateit/dist/ng-rateit.js',
+      'bower_components/hammerjs/hammer.js',
+      'bower_components/swipe-li/dist/swipe-li.min.js',
       'bower_components/angular-mocks/angular-mocks.js',
       // endbower
       'app/scripts/**/*.js',

@@ -3,9 +3,30 @@
           md-swipe-content="true" md-selected="selectedIndex">
   <md-tab label="{{day.title}}" ng-repeat="day in scheda.day">
     <md-content class="md-padding">
+
+
       <md-content style="height: 600px;">
         <section ng-repeat="grp in day.gruppi">
            <md-subheader class="md-primary">{{grp.nome}}</md-subheader>
+
+
+           <div ng-repeat="eser in grp.esercizi">
+              <div swipe-li
+                class="item"
+                disabled=""
+                intent="true"
+                accept="done(item)"
+                reject="skip(item)"
+                main-content="'views/sample-content.html'"
+                accept-content="'views/accept-content.html'"
+                reject-content="'views/reject-content.html'"
+                reset-to-content="false"
+                ng-class="{invert: item.doInvert}"
+              ></div>
+            </div>
+
+
+<!--
            <md-list layout-padding >
              <md-list-item class="md-2-line" ng-repeat="eser in grp.esercizi">
                   <div class="md-list-item-text">
@@ -14,8 +35,10 @@
                   </div>
              </md-list-item>
            </md-list>
+-->
         </section>
-      </md-content >
+      </md-content>
+
     </md-content>
   </md-tab>
 </md-tabs>
