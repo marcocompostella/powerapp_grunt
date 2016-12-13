@@ -42,7 +42,7 @@ angular.module('powerApp')
         fullscreen: false, // Only for -xs, -sm breakpoints.
         parent: angular.element(document.body),
         templateUrl: 'views/dialogMonth.html',
-        controller: DialogController,
+        controller: DialogMonthController,
         resolve: {
           training: function(){
             return {
@@ -70,7 +70,7 @@ angular.module('powerApp')
     };
 }]);
 
-function DialogController($scope, $mdDialog, training) {
+function DialogMonthController($scope, $mdDialog, training) {
   var first = true;
   $scope.list = training.schede.map(function(x){return x.data});
   $scope.indx = training.index;

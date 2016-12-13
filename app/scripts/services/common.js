@@ -37,12 +37,6 @@ angular.module('powerApp')
   };
 
 
-
-
-
-
-
-
   var wrapAuth = function(val){
     authService.setLoginStatus(val);
   };
@@ -94,6 +88,9 @@ angular.module('powerApp')
         .startInit("cd0dc958-90b1-437b-8ff5-09d6211a1a70", "949075032282")
         .handleNotificationOpened(notificationOpenedCallback)
         .endInit();
+      window.plugins.OneSignal.getIds(function(ids) {
+          $http.get(API_ENDPOINT.url + '/setRegID').then(function(result){ });
+        });
     });
 
 
